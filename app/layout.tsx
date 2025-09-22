@@ -8,9 +8,8 @@ import "./globals.css"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export const metadata: Metadata = {
-  title: "Adesh Rai - Retro Portfolio",
-  description: "A retro 8-bit style portfolio showcasing web development skills",
-  generator: "v0.app",
+  title: "Adesh Rai",
+  description: "A retroportfolio showcasing web development skills",
 }
 
 export default function RootLayout({
