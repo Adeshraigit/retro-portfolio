@@ -116,7 +116,7 @@ export default function Portfolio() {
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ type: "spring", stiffness: 300, damping: 10 }}
           >
-            <div className="h-[300px] w-[300px] border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] pixelated overflow-hidden">
+            <div className="w-36 sm:w-48 md:w-56 lg:w-64 xl:w-72 aspect-square border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] pixelated overflow-hidden">
               <img src={DATA.avatarUrl} alt={DATA.name} className="w-full h-full object-cover" />
             </div>
           </motion.div>
