@@ -88,10 +88,18 @@ export const DATA = {
   ],
   education: [
     {
+      school: "Saraswati College of Engineering",
+      href: "",
+      degree: "B.E in CSE(AI&ML)",
+      logoUrl: "",
+      start: "2025",
+      end: "2028",
+    },
+    {
       school: "V.B.M Model High School",
       href: "",
       degree: "10th SSC",
-      logoUrl: "/VBM.png",
+      logoUrl: "",
       start: "2012",
       end: "2022",
     },
@@ -99,7 +107,7 @@ export const DATA = {
       school: "Vidyalankar Polytechnic",
       href: "https://vpt.edu.in/",
       degree: "Diploma in Computer Engineering",
-      logoUrl: "/Vpt.png",
+      logoUrl: "",
       start: "2022",
       end: "2025",
     },
