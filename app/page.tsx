@@ -204,6 +204,60 @@ export default function Portfolio() {
           </Card>
         </motion.div>
 
+        {/* Projects Section */}
+        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
+          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">Projects</CardTitle>
+            </CardHeader>
+            {/* Responsive grid: 1 col on mobile, 2 on md, 3 on xl */}
+            <CardContent className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+              {DATA.projects.slice(0, 6).map((project, index) => (
+                <motion.div
+                  key={index}
+                  className="space-y-3 sm:space-y-4 p-4 sm:p-5 md:p-6 border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] bg-white dark:bg-black"
+                  whileHover={{
+                    scale: 1.03,
+                    rotate: index % 2 === 0 ? 1 : -1,
+                    transition: { type: "spring", stiffness: 300, damping: 10 },
+                  }}
+                >
+                  <h3 className="font-bold text-base sm:text-lg text-black dark:text-white font-mono break-words">{project.title}</h3>
+                  <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <Badge key={tech} className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-[10px] sm:text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
+                    {project.links.map((link, linkIndex) => (
+                      <motion.div key={linkIndex} className="flex-1 sm:flex-none" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                        <Button
+                          className={
+                            (linkIndex === 0
+                              ? "bg-black dark:bg-white text-white dark:text-black"
+                              : "bg-white dark:bg-black text-black dark:text-white") +
+                            " w-full sm:w-auto border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_#fff] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] dark:hover:shadow-[1px_1px_0px_0px_#fff] transition-all font-mono px-3 py-2 text-xs sm:text-sm"
+                          }
+                          variant={linkIndex === 0 ? "default" : "outline"}
+                          onClick={() => window.open(link.href, '_blank')}
+                        >
+                          {link.type === "Github" ? <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-2" /> : <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />}
+                          {link.type}
+                        </Button>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </CardContent>
+          </Card>
+        </motion.div>
+
         {/* Education Section */}
         <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
           <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
@@ -271,60 +325,6 @@ export default function Portfolio() {
                   </motion.div>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Projects Section */}
-        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
-          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">Projects</CardTitle>
-            </CardHeader>
-            {/* Responsive grid: 1 col on mobile, 2 on md, 3 on xl */}
-            <CardContent className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-              {DATA.projects.slice(0, 6).map((project, index) => (
-                <motion.div
-                  key={index}
-                  className="space-y-3 sm:space-y-4 p-4 sm:p-5 md:p-6 border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] bg-white dark:bg-black"
-                  whileHover={{
-                    scale: 1.03,
-                    rotate: index % 2 === 0 ? 1 : -1,
-                    transition: { type: "spring", stiffness: 300, damping: 10 },
-                  }}
-                >
-                  <h3 className="font-bold text-base sm:text-lg text-black dark:text-white font-mono break-words">{project.title}</h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <Badge key={tech} className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-[10px] sm:text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2 sm:gap-3">
-                    {project.links.map((link, linkIndex) => (
-                      <motion.div key={linkIndex} className="flex-1 sm:flex-none" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                        <Button
-                          className={
-                            (linkIndex === 0
-                              ? "bg-black dark:bg-white text-white dark:text-black"
-                              : "bg-white dark:bg-black text-black dark:text-white") +
-                            " w-full sm:w-auto border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_#fff] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] dark:hover:shadow-[1px_1px_0px_0px_#fff] transition-all font-mono px-3 py-2 text-xs sm:text-sm"
-                          }
-                          variant={linkIndex === 0 ? "default" : "outline"}
-                          onClick={() => window.open(link.href, '_blank')}
-                        >
-                          {link.type === "Github" ? <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-2" /> : <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />}
-                          {link.type}
-                        </Button>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
             </CardContent>
           </Card>
         </motion.div>
