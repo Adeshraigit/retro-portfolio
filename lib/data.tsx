@@ -3,13 +3,13 @@ import { HomeIcon, NotebookIcon, Github, Linkedin, Mail, Twitter, Globe } from "
 export const DATA = {
   name: "Adesh Rai",
   initials: "AR",
-  url: "https://adesh-rai.vercel.app",
+  url: "https://adeshrai.me",
   location: "Mumbai",
   locationLink: "",
   description:
     "I design and build innovative web solutions with a focus on simplicity, performance, and user experience.",
   summary:
-    "Full-Stack Developer focused on building scalable apps and AI-powered solutions. Skilled in Next.js, React, Node.js, TypeScript, MongoDB, Tailwind CSS, and REST APIs. I specialize in performance optimization, backend integration, and intuitive UI design. I enjoy collaborating in teams, leading projects, and pushing boundaries through hackathons and technical events.",
+    "Full-Stack Developer skilled in Next.js, React, Node.js, and TypeScript, with experience leading end-to-end develop-ment of scalable web applications, including an LMS for AISKOOL. Experienced in AI chatbot projects and freelance development, with a strong focus on performance, usability, and effective collaboration.",
   avatarUrl: "/image.png",
   skills: [
     "React",
@@ -23,7 +23,6 @@ export const DATA = {
     "GitHub",
     "TailwindCSS",
     "Java",
-    "C++",
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -61,6 +60,30 @@ export const DATA = {
 
   work: [
     {
+      company: "Discover Technologies",
+      href: "https://www.discovertechnologies.co.in/",
+      badges: [],
+      location: "Remote",
+      title: "SDE Intern",
+      logoUrl: "/Nighwan.png",
+      start: "June 2024",
+      end: "November 2025",
+      description:
+        "Led the end-to-end development and delivery of AISKOOL’s scalable LMS at Discover Technologies, owning full-stack implementation and requirements in close collaboration with the team.",
+    },
+    {
+      company: "Nighwan Technologies PVT. LTD.",
+      href: "https://nighwantech.com/",
+      badges: [],
+      location: "Remote",
+      title: "SDE Intern",
+      logoUrl: "/Nighwan.png",
+      start: "October 2024",
+      end: "April 2025",
+      description:
+        "Collaborated on Angular, React, TypeScript, and Node.js projects while optimizing performance and building scalable solutions.",
+    },
+    {
       company: "Elight Labs",
       href: "https://elightlabs.com",
       badges: [],
@@ -72,19 +95,6 @@ export const DATA = {
       description:
         "Worked On Various Projects",
     },
-    {
-      company: "Nighwan Technologies PVT. LTD.",
-      href: "https://nighwantech.com/",
-      badges: [],
-      location: "Remote",
-      title: "Software Devloper Intern",
-      logoUrl: "/Nighwan.png",
-      start: "October 2024",
-      end: "April 2025",
-      description:
-        "Working On Various Projects",
-    },
-    
   ],
   education: [
     {
