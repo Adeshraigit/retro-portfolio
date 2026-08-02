@@ -23,20 +23,21 @@ import {
 import { motion } from "framer-motion"
 import { DATA } from "@/lib/data"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { ShootingStars } from "@/components/ui/shooting-stars"
-import { StarsBackground } from "@/components/ui/stars-background"
+import { PageBackground } from "@/components/page-background"
+import { BlurFade } from "@/components/ui/blur-fade"
+import { GithubContributions } from "@/components/github-contributions"
 
 const projectIcons = [Sparkles, ShoppingBag, Music2, SquareCheckBig, Terminal, Coffee]
 
 function SectionHeading({ id, eyebrow, title, description }: { id: string; eyebrow: string; title: string; description?: string }) {
   return (
-    <div className="section-heading">
+    <BlurFade className="section-heading" inView duration={0.48} offset={10} blur="7px">
       <p className="section-eyebrow">{eyebrow}</p>
       <div className="section-title-row">
         <h2 id={id}>{title}</h2>
         {description ? <p>{description}</p> : null}
       </div>
-    </div>
+    </BlurFade>
   )
 }
 
@@ -68,26 +69,7 @@ function ProjectPreview({ title, index }: { title: string; index: number }) {
 export default function Portfolio() {
   return (
     <div className="site-shell">
-      <div className="background-effect" aria-hidden="true">
-        <StarsBackground
-          className="background-stars"
-          starDensity={0.00012}
-          twinkleProbability={0.62}
-          minTwinkleSpeed={0.7}
-          maxTwinkleSpeed={1.4}
-        />
-        <ShootingStars
-          className="background-shooting"
-          minSpeed={2}
-          maxSpeed={5}
-          minDelay={2600}
-          maxDelay={5600}
-          starColor="#ffffff"
-          trailColor="#ffffff"
-          starWidth={68}
-          starHeight={1.5}
-        />
-      </div>
+      <PageBackground />
       <a className="skip-link" href="#main">Skip to content</a>
       <div className="ambient ambient-one" aria-hidden="true" />
       <div className="ambient ambient-two" aria-hidden="true" />
@@ -110,22 +92,24 @@ export default function Portfolio() {
 
       <main id="main" className="page-wrap">
         <section id="top" className="hero" aria-labelledby="hero-title">
-          <motion.div
+          <BlurFade
             className="hero-copy"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
+            duration={0.7}
+            offset={18}
+            blur="10px"
           >
-            <div className="availability"><span /> Full-stack developer · Mumbai</div>
             <h1 id="hero-title">hey, Adesh here<span>.</span></h1>
-            <p className="hero-lead">
-              I design and build fast, thoughtful web products with <strong>Next.js</strong>, <strong>React</strong>,
-              Node.js, and AI.
-            </p>
-            <p className="hero-note">
-              I&apos;ve led full-stack delivery for a scalable LMS, built AI chatbot experiences, and collaborated with
-              teams to turn ideas into reliable products.
-            </p>
+            <p className="hero-tagline"><span className="availability-dot" /> Full-stack developer · Mumbai</p>
+            <div className="hero-story">
+              <p className="hero-lead">
+                Currently building thoughtful web products with <strong>Next.js</strong>, <strong>React</strong>, Node.js,
+                and AI.
+              </p>
+              <p className="hero-note">
+                I&apos;ve led the full-stack delivery of a scalable LMS and built AI chatbot experiences for real people.
+              </p>
+              <p className="hero-note">I care about fast interfaces, useful details, and teams that ship with intention.</p>
+            </div>
 
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">View my work <ArrowDownRight size={17} /></a>
@@ -137,23 +121,23 @@ export default function Portfolio() {
               <a href={DATA.contact.social.LinkedIn.url} target="_blank" rel="noreferrer" aria-label="Adesh Rai on LinkedIn"><Linkedin size={18} /></a>
               <a href={DATA.contact.social.X.url} target="_blank" rel="noreferrer" aria-label="Adesh Rai on X">X</a>
             </div>
-          </motion.div>
+          </BlurFade>
 
-          <motion.div
+          <BlurFade
             className="hero-visual"
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.12, ease: "easeOut" }}
+            duration={0.72}
+            delay={0.12}
+            direction="up"
+            offset={14}
+            blur="9px"
           >
             <div className="portrait-ring">
               <Image src="/adesh.jpeg" alt="Portrait of Adesh Rai" width={260} height={260} priority />
             </div>
-            <div className="status-card">
-              <span className="status-icon"><Code2 size={18} /></span>
-              <div><small>Currently focused on</small><strong>Useful products &amp; clean UX</strong></div>
-            </div>
-          </motion.div>
+          </BlurFade>
         </section>
+
+        <GithubContributions />
 
         <section className="proof-strip" aria-label="Portfolio summary">
           <div><strong>{DATA.work.length}</strong><span>professional roles</span></div>
@@ -165,16 +149,19 @@ export default function Portfolio() {
           <SectionHeading id="stack-title" eyebrow="Technologies" title="Tech Stack" description="The tools I use to ship production-ready experiences." />
           <div className="skill-grid">
             {DATA.skills.map((skill, index) => (
-              <motion.span
+              <BlurFade
                 key={skill}
-                initial={{ opacity: 0, y: 8 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.6 }}
-                transition={{ delay: Math.min(index * 0.035, 0.3) }}
+                className="skill-chip-reveal"
+                inView
+                delay={Math.min(index * 0.035, 0.3)}
+                offset={8}
+                blur="5px"
               >
-                {index % 3 === 0 ? <Code2 size={15} /> : index % 3 === 1 ? <Terminal size={15} /> : <Sparkles size={15} />}
-                {skill}
-              </motion.span>
+                <span>
+                  {index % 3 === 0 ? <Code2 size={15} /> : index % 3 === 1 ? <Terminal size={15} /> : <Sparkles size={15} />}
+                  {skill}
+                </span>
+              </BlurFade>
             ))}
           </div>
         </section>
@@ -183,32 +170,35 @@ export default function Portfolio() {
           <SectionHeading id="projects-title" eyebrow="Portfolio" title="Featured Projects" description="A selection of products, experiments, and client work." />
           <div className="project-grid">
             {DATA.projects.map((project, index) => (
-              <motion.article
-                className="project-card"
+              <BlurFade
                 key={project.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.45, delay: (index % 3) * 0.07 }}
+                className="project-reveal"
+                inView
+                delay={(index % 3) * 0.07}
+                duration={0.52}
+                offset={20}
+                blur="8px"
               >
-                <ProjectPreview title={project.title} index={index} />
-                <div className="project-body">
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
-                  <div className="tag-row">
-                    {project.technologies.slice(0, 4).map((technology) => <span key={technology}>{technology}</span>)}
+                <motion.article className="project-card">
+                  <ProjectPreview title={project.title} index={index} />
+                  <div className="project-body">
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="tag-row">
+                      {project.technologies.slice(0, 4).map((technology) => <span key={technology}>{technology}</span>)}
+                    </div>
+                    <div className="project-links">
+                      {project.links.map((link) => (
+                        <a key={`${project.title}-${link.type}`} href={link.href} target="_blank" rel="noreferrer">
+                          {link.type === "Github" ? <Github size={15} /> : <ExternalLink size={15} />}
+                          {link.type === "Github" ? "Source" : "Website"}
+                          <ArrowUpRight size={14} />
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                  <div className="project-links">
-                    {project.links.map((link) => (
-                      <a key={`${project.title}-${link.type}`} href={link.href} target="_blank" rel="noreferrer">
-                        {link.type === "Github" ? <Github size={15} /> : <ExternalLink size={15} />}
-                        {link.type === "Github" ? "Source" : "Website"}
-                        <ArrowUpRight size={14} />
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </motion.article>
+                </motion.article>
+              </BlurFade>
             ))}
           </div>
         </section>
