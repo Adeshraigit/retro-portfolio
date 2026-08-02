@@ -4,12 +4,10 @@ import Image from "next/image"
 import {
   ArrowDownRight,
   ArrowUpRight,
-  BriefcaseBusiness,
   Code2,
   Coffee,
   ExternalLink,
   Github,
-  GraduationCap,
   Home,
   Linkedin,
   Mail,
@@ -27,6 +25,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { PageBackground } from "@/components/page-background"
 import { BlurFade } from "@/components/ui/blur-fade"
 import { GithubContributions } from "@/components/github-contributions"
+import { Cta1 } from "@/components/ui/cta1"
 
 const projectIcons = [Sparkles, ShoppingBag, Music2, SquareCheckBig, Terminal, Coffee]
 
@@ -65,6 +64,16 @@ function ProjectPreview({ title, index }: { title: string; index: number }) {
       </div>
     </div>
   )
+}
+
+function labelInitials(label: string) {
+  return label
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase()
 }
 
 export default function Portfolio() {
@@ -198,45 +207,77 @@ export default function Portfolio() {
 
         <section id="experience" className="content-section" aria-labelledby="experience-title">
           <SectionHeading id="experience-title" eyebrow="Career" title="Work Experience" description="Roles where I learned, collaborated, and shipped." />
-          <div className="timeline-list">
-            {DATA.work.map((job) => (
-              <a className="timeline-card" href={job.href} target="_blank" rel="noreferrer" key={`${job.company}-${job.title}`}>
-                <span className="timeline-icon"><BriefcaseBusiness size={19} /></span>
-                <div className="timeline-main">
-                  <div className="timeline-heading"><h3>{job.company}</h3><time>{job.start} — {job.end}</time></div>
-                  <strong>{job.title}</strong>
-                  <p>{job.description}</p>
-                </div>
-                <ArrowUpRight className="timeline-arrow" size={18} />
-              </a>
+          <div className="career-list">
+            {DATA.work.map((job, index) => (
+              <BlurFade
+                key={`${job.company}-${job.title}`}
+                className="career-row-reveal"
+                inView
+                delay={Math.min(index * 0.06, 0.18)}
+                duration={0.46}
+                offset={10}
+                blur="6px"
+              >
+                <a
+                  className="career-row"
+                  href={job.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${job.title} at ${job.company}`}
+                >
+                  <span className={`career-thumb career-thumb-${index}`} aria-hidden="true">
+                    {labelInitials(job.company)}
+                  </span>
+                  <span className="career-details">
+                    <strong>{job.title}</strong>
+                    <span>{job.company}</span>
+                  </span>
+                  <time className="career-period">{job.start} — {job.end}</time>
+                </a>
+              </BlurFade>
             ))}
           </div>
         </section>
 
         <section className="content-section" aria-labelledby="education-title">
           <SectionHeading id="education-title" eyebrow="Academic" title="Education" />
-          <div className="education-grid">
-            {DATA.education.map((education) => (
-              <article className="education-card" key={education.school}>
-                <span><GraduationCap size={19} /></span>
-                <div><h3>{education.school}</h3><p>{education.degree}</p><time>{education.start} — {education.end}</time></div>
-              </article>
-            ))}
+          <div className="academic-list">
+            {DATA.education.map((education, index) => {
+              const content = (
+                <>
+                  <span className={`academic-thumb academic-thumb-${index}`} aria-hidden="true">
+                    {labelInitials(education.school)}
+                  </span>
+                  <span className="academic-details">
+                    <strong>{education.school}</strong>
+                    <span>{education.degree}</span>
+                  </span>
+                  <time className="academic-period">{education.start} — {education.end}</time>
+                </>
+              )
+
+              return education.href ? (
+                <a className="academic-row" href={education.href} target="_blank" rel="noreferrer" key={education.school}>
+                  {content}
+                </a>
+              ) : (
+                <article className="academic-row" key={education.school}>
+                  {content}
+                </article>
+              )
+            })}
           </div>
         </section>
 
-        <section id="contact" className="contact-section" aria-labelledby="contact-title">
-          <div>
-            <p className="section-eyebrow">Get in touch</p>
-            <h2 id="contact-title">Have an idea worth building?</h2>
-            <p>I&apos;d love to hear about your product, website, or collaboration.</p>
-          </div>
-          <a className="contact-link" href={`mailto:${DATA.contact.email}`}>
-            <span><Mail size={20} /></span>
-            <div><small>Email me</small><strong>{DATA.contact.email}</strong></div>
-            <ArrowUpRight size={19} />
-          </a>
-        </section>
+        <Cta1
+          id="contact"
+          eyebrow="Get in touch"
+          title="Have an idea worth building?"
+          description="I&apos;d love to hear about your product, website, or collaboration."
+          buttonText="Let&apos;s talk"
+          buttonLink={`mailto:${DATA.contact.email}`}
+          buttonIcon={<ArrowUpRight size={17} />}
+        />
       </main>
 
       <footer className="footer">

@@ -71,7 +71,19 @@ export function HoverBorderGradient({
       </div>
       <motion.div
         className="pointer-events-none absolute inset-0 z-0 flex-none overflow-hidden rounded-[inherit]"
-        style={{ filter: "blur(2px)", width: "100%", height: "100%", willChange: "background" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          padding: "2px",
+          boxSizing: "border-box",
+          filter: "blur(0.75px)",
+          willChange: "background",
+          // Keep the animated color in the border ring; it must not wash over
+          // the contribution cells or the card surface.
+          WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+        }}
         initial={{ background: movingMap[direction] }}
         animate={{ background: hovered ? [movingMap[direction], highlight] : movingMap[direction] }}
         transition={{ ease: "linear", duration }}

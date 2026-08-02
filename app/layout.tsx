@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://adeshrai.me"),
   title: "Adesh Rai — Full-Stack Developer",
   description: "Portfolio of Adesh Rai, a full-stack developer building fast, thoughtful web products with Next.js, React, Node.js, and AI.",
+  icons: {
+    icon: "/profile-photo.jpg",
+    shortcut: "/profile-photo.jpg",
+    apple: "/profile-photo.jpg",
+  },
   openGraph: {
     title: "Adesh Rai — Full-Stack Developer",
     description: "Fast, thoughtful web products built with Next.js, React, Node.js, and AI.",

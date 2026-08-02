@@ -36,12 +36,12 @@ export const Meteors = ({ number = 20, className }: MeteorsProps) => {
           key={`meteor-${index}`}
           aria-hidden="true"
           className={cn(
-            "meteor-head pointer-events-none absolute left-1/2 top-1/2 z-[2] size-1 rotate-[215deg] animate-meteor rounded-full",
+            "meteor-head pointer-events-none absolute left-1/2 top-1/2 z-[2] size-1 animate-meteor rounded-full",
             className,
           )}
           style={style}
         >
-          <span className="meteor-tail pointer-events-none absolute top-1/2 left-[-72px] z-[-1] h-px w-[72px] -translate-y-1/2" />
+          <span className="meteor-tail pointer-events-none absolute top-1/2 left-0 z-[-1] h-px w-[72px] -translate-y-1/2" />
         </span>
       ))}
     </>

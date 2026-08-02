@@ -106,14 +106,6 @@ export const DATA = {
       end: "2028",
     },
     {
-      school: "V.B.M Model High School",
-      href: "",
-      degree: "10th SSC",
-      logoUrl: "",
-      start: "2012",
-      end: "2022",
-    },
-    {
       school: "Vidyalankar Polytechnic",
       href: "https://vpt.edu.in/",
       degree: "Diploma in Computer Engineering",
@@ -121,7 +113,14 @@ export const DATA = {
       start: "2022",
       end: "2025",
     },
-    
+    {
+      school: "V.B.M Model High School",
+      href: "",
+      degree: "10th SSC",
+      logoUrl: "",
+      start: "2012",
+      end: "2022",
+    },
   ],
   projects: [
     {
