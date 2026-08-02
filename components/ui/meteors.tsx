@@ -14,12 +14,15 @@ export const Meteors = ({ number = 20, className }: MeteorsProps) => {
   useEffect(() => {
     const styles = Array.from({ length: Math.max(0, number) }, () => {
       const left = `${Math.floor(Math.random() * window.innerWidth)}px`
+      const duration = 7 + Math.random() * 6
       return {
         top: "-5px",
         left,
         "--meteor-left": left,
-        animationDelay: `${Math.random() * 1 + 0.2}s`,
-        animationDuration: `${Math.floor(Math.random() * 8 + 2)}s`,
+        // Negative delays distribute the meteors across their path on first paint,
+        // avoiding a burst of dots entering together at the top of the page.
+        animationDelay: `${-Math.random() * duration}s`,
+        animationDuration: `${duration.toFixed(2)}s`,
       } as CSSProperties
     })
 
@@ -33,12 +36,12 @@ export const Meteors = ({ number = 20, className }: MeteorsProps) => {
           key={`meteor-${index}`}
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute left-1/2 top-1/2 z-[2] size-1 rotate-[215deg] animate-meteor rounded-full bg-slate-300 shadow-[0_0_0_1px_#ffffff30]",
+            "meteor-head pointer-events-none absolute left-1/2 top-1/2 z-[2] size-1 rotate-[215deg] animate-meteor rounded-full",
             className,
           )}
           style={style}
         >
-          <span className="pointer-events-none absolute top-1/2 left-[-72px] z-[-1] h-px w-[72px] -translate-y-1/2 bg-gradient-to-r from-transparent to-slate-300/90" />
+          <span className="meteor-tail pointer-events-none absolute top-1/2 left-[-72px] z-[-1] h-px w-[72px] -translate-y-1/2" />
         </span>
       ))}
     </>

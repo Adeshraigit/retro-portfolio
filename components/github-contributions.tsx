@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { ArrowUpRight, Github } from "lucide-react"
 import { DATA } from "@/lib/data"
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient"
 
 type ContributionCell = {
   date: string
@@ -96,7 +97,12 @@ export function GithubContributions() {
         </a>
       </div>
 
-      <div className="contribution-panel">
+      <HoverBorderGradient
+        as="div"
+        duration={1.15}
+        containerClassName="contribution-border-gradient"
+        className="contribution-panel"
+      >
         <div className="contribution-scroll" role="img" aria-label={`GitHub contribution activity for ${liveData?.username ?? "Adesh Rai"}`}>
           <div className="contribution-months" aria-hidden="true">
             {months.map((month, index) => (
@@ -127,7 +133,7 @@ export function GithubContributions() {
             <span>More</span>
           </span>
         </div>
-      </div>
+      </HoverBorderGradient>
     </section>
   )
 }

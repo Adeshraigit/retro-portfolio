@@ -14,6 +14,7 @@ import {
   Linkedin,
   Mail,
   MapPin,
+  MousePointer2,
   Music2,
   ShoppingBag,
   Sparkles,
@@ -84,7 +85,6 @@ export default function Portfolio() {
             <a href="#contact">Contact</a>
           </div>
           <div className="nav-tools">
-            <span className="nav-terminal" aria-hidden="true"><Terminal size={16} /></span>
             <ThemeToggle />
           </div>
         </div>
@@ -98,17 +98,16 @@ export default function Portfolio() {
             offset={18}
             blur="10px"
           >
-            <h1 id="hero-title">hey, Adesh here<span>.</span></h1>
-            <p className="hero-tagline"><span className="availability-dot" /> Full-stack developer · Mumbai</p>
+            <h1 id="hero-title">hey, Adesh here</h1>
+            <p className="hero-tagline"><MousePointer2 className="hero-pointer" size={20} strokeWidth={1.8} aria-hidden="true" /> Full-stack developer · Mumbai</p>
             <div className="hero-story">
               <p className="hero-lead">
-                Currently building thoughtful web products with <strong>Next.js</strong>, <strong>React</strong>, Node.js,
-                and AI.
+                Currently <strong>freelancing</strong> and <strong>collaborating</strong> with new people on exciting projects.
               </p>
               <p className="hero-note">
-                I&apos;ve led the full-stack delivery of a scalable LMS and built AI chatbot experiences for real people.
+                I design and build thoughtful web products with <strong>Next.js</strong>, <strong>React</strong>, Node.js,
+                and AI.
               </p>
-              <p className="hero-note">I care about fast interfaces, useful details, and teams that ship with intention.</p>
             </div>
 
             <div className="hero-actions">
@@ -132,18 +131,12 @@ export default function Portfolio() {
             blur="9px"
           >
             <div className="portrait-ring">
-              <Image src="/adesh.jpeg" alt="Portrait of Adesh Rai" width={260} height={260} priority />
+              <Image src={DATA.avatarUrl} alt="Portrait of Adesh Rai" width={260} height={260} priority />
             </div>
           </BlurFade>
         </section>
 
         <GithubContributions />
-
-        <section className="proof-strip" aria-label="Portfolio summary">
-          <div><strong>{DATA.work.length}</strong><span>professional roles</span></div>
-          <div><strong>{DATA.projects.length}</strong><span>selected projects</span></div>
-          <div><strong>{DATA.skills.length}</strong><span>core technologies</span></div>
-        </section>
 
         <section id="stack" className="content-section" aria-labelledby="stack-title">
           <SectionHeading id="stack-title" eyebrow="Technologies" title="Tech Stack" description="The tools I use to ship production-ready experiences." />

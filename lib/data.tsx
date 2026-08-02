@@ -10,7 +10,7 @@ export const DATA = {
     "I design and build innovative web solutions with a focus on simplicity, performance, and user experience.",
   summary:
     "Full-stack developer skilled in Next.js, React, Node.js, and TypeScript, with experience leading end-to-end development of scalable web applications, including an LMS for AISKOOL. Experienced in AI chatbot projects and freelance development, with a strong focus on performance, usability, and effective collaboration.",
-  avatarUrl: "/image.png",
+  avatarUrl: "/profile-photo.jpg",
   skills: [
     "React",
     "Next.js",
