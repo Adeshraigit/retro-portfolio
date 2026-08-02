@@ -1,388 +1,265 @@
 "use client"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, ExternalLink, Calendar } from "lucide-react"
+
+import Image from "next/image"
+import {
+  ArrowDownRight,
+  ArrowUpRight,
+  BriefcaseBusiness,
+  Code2,
+  Coffee,
+  ExternalLink,
+  Github,
+  GraduationCap,
+  Home,
+  Linkedin,
+  Mail,
+  MapPin,
+  Music2,
+  ShoppingBag,
+  Sparkles,
+  SquareCheckBig,
+  Terminal,
+} from "lucide-react"
 import { motion } from "framer-motion"
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { DATA } from "@/lib/data"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { ShootingStars } from "@/components/ui/shooting-stars"
+import { StarsBackground } from "@/components/ui/stars-background"
 
-gsap.registerPlugin(ScrollTrigger)
+const projectIcons = [Sparkles, ShoppingBag, Music2, SquareCheckBig, Terminal, Coffee]
 
-export default function Portfolio() {
-  const containerRef = useRef<HTMLDivElement>(null)
+function SectionHeading({ id, eyebrow, title, description }: { id: string; eyebrow: string; title: string; description?: string }) {
+  return (
+    <div className="section-heading">
+      <p className="section-eyebrow">{eyebrow}</p>
+      <div className="section-title-row">
+        <h2 id={id}>{title}</h2>
+        {description ? <p>{description}</p> : null}
+      </div>
+    </div>
+  )
+}
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate cards on scroll
-      gsap.fromTo(
-        ".animate-card",
-        {
-          y: 50,
-          opacity: 0,
-          scale: 0.95,
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: ".animate-card",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      )
-
-      // Animate skill badges
-      gsap.fromTo(
-        ".skill-badge",
-        {
-          scale: 0,
-          rotation: -180,
-        },
-        {
-          scale: 1,
-          rotation: 0,
-          duration: 0.4,
-          ease: "back.out(2)",
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: ".skills-container",
-            start: "top 70%",
-            toggleActions: "play none none reverse",
-          },
-        },
-      )
-    }, containerRef)
-
-    return () => ctx.revert()
-  }, [])
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 10,
-      },
-    },
-  }
-
-  const cardHoverVariants = {
-    hover: {
-      scale: 1.02,
-      y: -5,
-      transition: {
-        type: "spring" as const,
-        stiffness: 400,
-        damping: 10,
-      },
-    },
-  }
+function ProjectPreview({ title, index }: { title: string; index: number }) {
+  const Icon = projectIcons[index % projectIcons.length]
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-white dark:bg-black relative transition-colors duration-300">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#333_1px,transparent_1px),linear-gradient(to_bottom,#333_1px,transparent_1px)] bg-[size:20px_20px] opacity-30"></div>
-      <motion.div
-        className="relative max-w-4xl mx-auto p-8 space-y-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Header Section */}
-        <motion.div className="text-center space-y-6" variants={itemVariants}>
+    <div className={`project-preview project-preview-${index + 1}`} aria-hidden="true">
+      <div className="preview-window">
+        <div className="preview-toolbar">
+          <span />
+          <span />
+          <span />
+          <small>adesh.build/{title.toLowerCase().replaceAll(" ", "-")}</small>
+        </div>
+        <div className="preview-content">
+          <div className="preview-icon"><Icon size={24} /></div>
+          <div>
+            <span className="preview-kicker">Selected project</span>
+            <strong>{title}</strong>
+          </div>
+        </div>
+        <div className="preview-lines"><i /><i /><i /></div>
+      </div>
+    </div>
+  )
+}
+
+export default function Portfolio() {
+  return (
+    <div className="site-shell">
+      <div className="background-effect" aria-hidden="true">
+        <StarsBackground
+          className="background-stars"
+          starDensity={0.00012}
+          twinkleProbability={0.62}
+          minTwinkleSpeed={0.7}
+          maxTwinkleSpeed={1.4}
+        />
+        <ShootingStars
+          className="background-shooting"
+          minSpeed={2}
+          maxSpeed={5}
+          minDelay={2600}
+          maxDelay={5600}
+          starColor="#ffffff"
+          trailColor="#ffffff"
+          starWidth={68}
+          starHeight={1.5}
+        />
+      </div>
+      <a className="skip-link" href="#main">Skip to content</a>
+      <div className="ambient ambient-one" aria-hidden="true" />
+      <div className="ambient ambient-two" aria-hidden="true" />
+      <div className="ambient ambient-three" aria-hidden="true" />
+
+      <nav className="floating-nav" aria-label="Primary navigation">
+        <a className="nav-home" href="#top" aria-label="Back to top"><Home size={17} /></a>
+        <div className="nav-right">
+          <div className="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div className="nav-tools">
+            <span className="nav-terminal" aria-hidden="true"><Terminal size={16} /></span>
+            <ThemeToggle />
+          </div>
+        </div>
+      </nav>
+
+      <main id="main" className="page-wrap">
+        <section id="top" className="hero" aria-labelledby="hero-title">
           <motion.div
-            className="flex justify-center items-center"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 300, damping: 10 }}
+            className="hero-copy"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, ease: "easeOut" }}
           >
-            <div className="w-36 sm:w-48 md:w-56 lg:w-64 xl:w-72 aspect-square border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] pixelated overflow-hidden">
-              <img src={DATA.avatarUrl} alt={DATA.name} className="w-full h-full object-cover" />
+            <div className="availability"><span /> Full-stack developer · Mumbai</div>
+            <h1 id="hero-title">hey, Adesh here<span>.</span></h1>
+            <p className="hero-lead">
+              I design and build fast, thoughtful web products with <strong>Next.js</strong>, <strong>React</strong>,
+              Node.js, and AI.
+            </p>
+            <p className="hero-note">
+              I&apos;ve led full-stack delivery for a scalable LMS, built AI chatbot experiences, and collaborated with
+              teams to turn ideas into reliable products.
+            </p>
+
+            <div className="hero-actions">
+              <a className="button button-primary" href="#projects">View my work <ArrowDownRight size={17} /></a>
+              <a className="button button-secondary" href={`mailto:${DATA.contact.email}`}>Let&apos;s talk <Mail size={16} /></a>
+            </div>
+
+            <div className="social-row" aria-label="Social links">
+              <a href={DATA.contact.social.GitHub.url} target="_blank" rel="noreferrer" aria-label="Adesh Rai on GitHub"><Github size={18} /></a>
+              <a href={DATA.contact.social.LinkedIn.url} target="_blank" rel="noreferrer" aria-label="Adesh Rai on LinkedIn"><Linkedin size={18} /></a>
+              <a href={DATA.contact.social.X.url} target="_blank" rel="noreferrer" aria-label="Adesh Rai on X">X</a>
             </div>
           </motion.div>
-          <div className="space-y-4">
-            <motion.h1
-              className="text-5xl font-bold text-black dark:text-white pixelated"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 200,
-                damping: 10,
-                delay: 0.3,
-              }}
-            >
-              Hi, I'm {DATA.name}
-            </motion.h1>
-            <motion.p
-              className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed font-mono"
-              variants={itemVariants}
-            >
-              {DATA.description}
-            </motion.p>
+
+          <motion.div
+            className="hero-visual"
+            initial={{ opacity: 0, scale: 0.94 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.12, ease: "easeOut" }}
+          >
+            <div className="portrait-ring">
+              <Image src="/adesh.jpeg" alt="Portrait of Adesh Rai" width={260} height={260} priority />
+            </div>
+            <div className="status-card">
+              <span className="status-icon"><Code2 size={18} /></span>
+              <div><small>Currently focused on</small><strong>Useful products &amp; clean UX</strong></div>
+            </div>
+          </motion.div>
+        </section>
+
+        <section className="proof-strip" aria-label="Portfolio summary">
+          <div><strong>{DATA.work.length}</strong><span>professional roles</span></div>
+          <div><strong>{DATA.projects.length}</strong><span>selected projects</span></div>
+          <div><strong>{DATA.skills.length}</strong><span>core technologies</span></div>
+        </section>
+
+        <section id="stack" className="content-section" aria-labelledby="stack-title">
+          <SectionHeading id="stack-title" eyebrow="Technologies" title="Tech Stack" description="The tools I use to ship production-ready experiences." />
+          <div className="skill-grid">
+            {DATA.skills.map((skill, index) => (
+              <motion.span
+                key={skill}
+                initial={{ opacity: 0, y: 8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.6 }}
+                transition={{ delay: Math.min(index * 0.035, 0.3) }}
+              >
+                {index % 3 === 0 ? <Code2 size={15} /> : index % 3 === 1 ? <Terminal size={15} /> : <Sparkles size={15} />}
+                {skill}
+              </motion.span>
+            ))}
           </div>
-        </motion.div>
+        </section>
 
-        {/* About Section */}
-        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
-          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">About</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-mono">
-                {DATA.summary}
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {DATA.skills.slice(0, 5).map((tech, index) => (
-                  <motion.div
-                    key={tech}
-                    whileHover={{ scale: 1.1, rotate: 2 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    <Badge className="bg-white dark:bg-black text-black dark:text-white border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_#fff] font-mono hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] dark:hover:shadow-[1px_1px_0px_0px_#fff] transition-all">
-                      {tech}
-                    </Badge>
-                  </motion.div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Experience Section */}
-        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
-          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">Experience</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-8">
-              {DATA.work.map((job, index) => (
-                <motion.div
-                  key={index}
-                  className="space-y-3"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="font-bold text-lg text-black dark:text-white font-mono">{job.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 font-mono">{job.company}</p>
-                    </div>
-                    <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 font-mono">
-                      <Calendar className="w-4 h-4" />
-                      {job.start} - {job.end}
-                    </div>
+        <section id="projects" className="content-section" aria-labelledby="projects-title">
+          <SectionHeading id="projects-title" eyebrow="Portfolio" title="Featured Projects" description="A selection of products, experiments, and client work." />
+          <div className="project-grid">
+            {DATA.projects.map((project, index) => (
+              <motion.article
+                className="project-card"
+                key={project.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.45, delay: (index % 3) * 0.07 }}
+              >
+                <ProjectPreview title={project.title} index={index} />
+                <div className="project-body">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <div className="tag-row">
+                    {project.technologies.slice(0, 4).map((technology) => <span key={technology}>{technology}</span>)}
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300 font-mono leading-relaxed">
-                    {job.description}
-                  </p>
-                </motion.div>
-              ))}
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* Projects Section */}
-        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
-          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">Projects</CardTitle>
-            </CardHeader>
-            {/* Responsive grid: 1 col on mobile, 2 on md, 3 on xl */}
-            <CardContent className="grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-              {DATA.projects.slice(0, 6).map((project, index) => (
-                <motion.div
-                  key={index}
-                  className="space-y-3 sm:space-y-4 p-4 sm:p-5 md:p-6 border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] bg-white dark:bg-black"
-                  whileHover={{
-                    scale: 1.03,
-                    rotate: index % 2 === 0 ? 1 : -1,
-                    transition: { type: "spring", stiffness: 300, damping: 10 },
-                  }}
-                >
-                  <h3 className="font-bold text-base sm:text-lg text-black dark:text-white font-mono break-words">{project.title}</h3>
-                  <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-mono leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <Badge key={tech} className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-[10px] sm:text-xs">
-                        {tech}
-                      </Badge>
+                  <div className="project-links">
+                    {project.links.map((link) => (
+                      <a key={`${project.title}-${link.type}`} href={link.href} target="_blank" rel="noreferrer">
+                        {link.type === "Github" ? <Github size={15} /> : <ExternalLink size={15} />}
+                        {link.type === "Github" ? "Source" : "Website"}
+                        <ArrowUpRight size={14} />
+                      </a>
                     ))}
                   </div>
-                  <div className="flex flex-wrap gap-2 sm:gap-3">
-                    {project.links.map((link, linkIndex) => (
-                      <motion.div key={linkIndex} className="flex-1 sm:flex-none" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                        <Button
-                          className={
-                            (linkIndex === 0
-                              ? "bg-black dark:bg-white text-white dark:text-black"
-                              : "bg-white dark:bg-black text-black dark:text-white") +
-                            " w-full sm:w-auto border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_#fff] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] dark:hover:shadow-[1px_1px_0px_0px_#fff] transition-all font-mono px-3 py-2 text-xs sm:text-sm"
-                          }
-                          variant={linkIndex === 0 ? "default" : "outline"}
-                          onClick={() => window.open(link.href, '_blank')}
-                        >
-                          {link.type === "Github" ? <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-2" /> : <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />}
-                          {link.type}
-                        </Button>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </CardContent>
-          </Card>
-        </motion.div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
 
-        {/* Education Section */}
-        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
-          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">Education</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-8">
-              {DATA.education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  className="space-y-3"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-4">
-                      <motion.div
-                        className={`w-12 h-12 ${index === 0 ? 'bg-white dark:bg-black' : 'bg-green-600'} border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_#fff] rounded-full flex items-center justify-center`}
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <span className={`text-xs font-bold ${index === 0 ? 'text-black dark:text-white' : 'text-white'} font-mono`}>
-                          {edu.school.split(' ').map(word => word[0]).join('').slice(0, 3)}
-                        </span>
-                      </motion.div>
-                      <div>
-                        <h3 className="font-bold text-lg text-black dark:text-white font-mono">
-                          {edu.school}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400 font-mono">{edu.degree}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 font-mono">
-                      <Calendar className="w-4 h-4" />
-                      {edu.start} - {edu.end}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </CardContent>
-          </Card>
-        </motion.div>
+        <section id="experience" className="content-section" aria-labelledby="experience-title">
+          <SectionHeading id="experience-title" eyebrow="Career" title="Work Experience" description="Roles where I learned, collaborated, and shipped." />
+          <div className="timeline-list">
+            {DATA.work.map((job) => (
+              <a className="timeline-card" href={job.href} target="_blank" rel="noreferrer" key={`${job.company}-${job.title}`}>
+                <span className="timeline-icon"><BriefcaseBusiness size={19} /></span>
+                <div className="timeline-main">
+                  <div className="timeline-heading"><h3>{job.company}</h3><time>{job.start} — {job.end}</time></div>
+                  <strong>{job.title}</strong>
+                  <p>{job.description}</p>
+                </div>
+                <ArrowUpRight className="timeline-arrow" size={18} />
+              </a>
+            ))}
+          </div>
+        </section>
 
-        {/* Skills Section */}
-        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
-          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">Skills</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-3 skills-container">
-                {DATA.skills.map((skill) => (
-                  <motion.div
-                    key={skill}
-                    whileHover={{
-                      scale: 1.1,
-                      rotate: [0, -5, 5, 0],
-                      transition: { duration: 0.3 },
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Badge className="bg-white dark:bg-black text-black dark:text-white border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_#000] dark:shadow-[2px_2px_0px_0px_#fff] font-mono hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0px_0px_#000] dark:hover:shadow-[1px_1px_0px_0px_#fff] transition-all skill-badge">
-                      {skill}
-                    </Badge>
-                  </motion.div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        <section className="content-section" aria-labelledby="education-title">
+          <SectionHeading id="education-title" eyebrow="Academic" title="Education" />
+          <div className="education-grid">
+            {DATA.education.map((education) => (
+              <article className="education-card" key={education.school}>
+                <span><GraduationCap size={19} /></span>
+                <div><h3>{education.school}</h3><p>{education.degree}</p><time>{education.start} — {education.end}</time></div>
+              </article>
+            ))}
+          </div>
+        </section>
 
-        {/* Contact Section */}
-        <motion.div variants={cardHoverVariants} whileHover="hover" className="animate-card">
-          <Card className="border-2 border-black dark:border-white shadow-[8px_8px_0px_0px_#000] dark:shadow-[8px_8px_0px_0px_#fff] bg-white dark:bg-black transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-black dark:text-white pixelated">Get In Touch</CardTitle>
-              <CardDescription className="font-mono text-gray-600 dark:text-gray-400">
-                Let's connect and build something amazing together!
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-4 justify-center">
-                {Object.entries(DATA.contact.social)
-                  .filter(([_, social]) => social.navbar)
-                  .map(([key, social]) => {
-                    const IconComponent = social.icon;
-                    return (
-                      <motion.div
-                        key={key}
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                      >
-                        <Button
-                          className={key === 'GitHub' ? "bg-black dark:bg-white text-white dark:text-black border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[3px_3px_0px_0px_#000] dark:hover:shadow-[3px_3px_0px_0px_#fff] transition-all font-mono" : "bg-white dark:bg-black text-black dark:text-white border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_#000] dark:shadow-[4px_4px_0px_0px_#fff] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[3px_3px_0px_0px_#000] dark:hover:shadow-[3px_3px_0px_0px_#fff] transition-all font-mono"}
-                          variant={key === 'GitHub' ? "default" : "outline"}
-                          onClick={() => {
-                            if (key === 'email') {
-                              window.location.href = `mailto:${DATA.contact.email}`;
-                            } else {
-                              window.open(social.url, '_blank');
-                            }
-                          }}
-                        >
-                          <IconComponent className="w-4 h-4 mr-2" />
-                          {social.name}
-                        </Button>
-                      </motion.div>
-                    );
-                  })}
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+        <section id="contact" className="contact-section" aria-labelledby="contact-title">
+          <div>
+            <p className="section-eyebrow">Get in touch</p>
+            <h2 id="contact-title">Have an idea worth building?</h2>
+            <p>I&apos;d love to hear about your product, website, or collaboration.</p>
+          </div>
+          <a className="contact-link" href={`mailto:${DATA.contact.email}`}>
+            <span><Mail size={20} /></span>
+            <div><small>Email me</small><strong>{DATA.contact.email}</strong></div>
+            <ArrowUpRight size={19} />
+          </a>
+        </section>
+      </main>
 
-        {/* Footer */}
-        <motion.div
-          className="text-center text-gray-600 dark:text-gray-400 text-sm font-mono pt-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-        >
-          <p>© 2025 {DATA.name}. Made with code and coffee</p>
-        </motion.div>
-      </motion.div>
+      <footer className="footer">
+        <div><strong>{DATA.name}</strong><span><MapPin size={14} /> {DATA.location}, India</span></div>
+        <p>© {new Date().getFullYear()} {DATA.name}. Designed with curiosity, built with code.</p>
+      </footer>
     </div>
   )
 }

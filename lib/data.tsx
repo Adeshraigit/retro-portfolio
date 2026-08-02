@@ -9,7 +9,7 @@ export const DATA = {
   description:
     "I design and build innovative web solutions with a focus on simplicity, performance, and user experience.",
   summary:
-    "Full-Stack Developer skilled in Next.js, React, Node.js, and TypeScript, with experience leading end-to-end develop-ment of scalable web applications, including an LMS for AISKOOL. Experienced in AI chatbot projects and freelance development, with a strong focus on performance, usability, and effective collaboration.",
+    "Full-stack developer skilled in Next.js, React, Node.js, and TypeScript, with experience leading end-to-end development of scalable web applications, including an LMS for AISKOOL. Experienced in AI chatbot projects and freelance development, with a strong focus on performance, usability, and effective collaboration.",
   avatarUrl: "/image.png",
   skills: [
     "React",
@@ -88,12 +88,12 @@ export const DATA = {
       href: "https://elightlabs.com",
       badges: [],
       location: "Remote",
-      title: "Frontend Devloper",
+      title: "Frontend Developer",
       logoUrl: "/Elight.png",
       start: "June 2024",
       end: "July 2024",
       description:
-        "Worked On Various Projects",
+        "Built responsive frontend experiences across multiple projects and collaborated with the team to deliver polished, usable interfaces.",
     },
   ],
   education: [
@@ -130,7 +130,7 @@ export const DATA = {
       dates: "",
       active: true,
       description:
-        "A Smart Chat Bot using RAG Model and Vector used for Engineering Admission. built with Next.js and TailwindCSS.Next UI, Datastax, OpenAI.",
+        "An engineering-admission assistant powered by retrieval-augmented generation and vector search, built with Next.js, DataStax, and OpenAI.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -156,7 +156,7 @@ export const DATA = {
       dates: "",
       active: true,
       description:
-        "A Product Store built with MERN Stack.",
+        "A full-stack product catalog and store experience built with MongoDB, Express, React, and Node.js.",
       technologies: [
         "MongoDB",
         "Express.js",
@@ -180,7 +180,7 @@ export const DATA = {
       dates: "",
       active: true,
       description:
-        "A Music Website built with Next.js and TailwindCSS.Aceternity UI.",
+        "An immersive music discovery experience built with Next.js, Tailwind CSS, and Aceternity UI.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -210,7 +210,7 @@ export const DATA = {
       dates: "",
       active: true,
       description:
-        "A Todo Website built with React.js and TailwindCSS.",
+        "A focused task-management experience built with React and Tailwind CSS.",
       technologies: [
         "React.js",
         "Javascript",
@@ -238,7 +238,7 @@ export const DATA = {
       dates: "",
       active: true,
       description:
-        "A Portfolio Website built with Next.js and TailwindCSS.Aceternity UI.",
+        "A cinematic portfolio for a video editor, built with Next.js, Tailwind CSS, and Aceternity UI.",
       technologies: [
         "Next.js",
         "Typescript",
@@ -263,12 +263,12 @@ export const DATA = {
         "",
     },
     {
-      title: "The Coffe Shop",
+      title: "The Coffee Shop",
       href: "https://the-coffee-shopp.netlify.app",
       dates: "",
       active: true,
       description:
-        "A Coffee Website built with Html, Css and Javascript, GSAP",
+        "An animated coffee-shop landing page built with HTML, CSS, JavaScript, and GSAP.",
       technologies: [
         "Html",
         "CSS",
