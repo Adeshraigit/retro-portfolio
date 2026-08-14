@@ -107,7 +107,7 @@ export default function Portfolio() {
             offset={18}
             blur="10px"
           >
-            <h1 id="hero-title">hey, Adesh here</h1>
+            <h1 id="hero-title">Adesh Rai</h1>
             <p className="hero-tagline"><MousePointer2 className="hero-pointer" size={20} strokeWidth={1.8} aria-hidden="true" /> Full-stack developer · Mumbai</p>
             <div className="hero-story">
               <p className="hero-lead">
